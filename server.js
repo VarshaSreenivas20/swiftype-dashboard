@@ -114,7 +114,10 @@ async function serveStatic(pathname, response) {
 }
 
 function json(response, status, body) {
-  response.writeHead(status, { "Content-Type": "application/json" });
+  response.writeHead(status, {
+    "Content-Type": "application/json",
+    "Cache-Control": "no-store"
+  });
   response.end(JSON.stringify(body));
 }
 

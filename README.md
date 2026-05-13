@@ -68,3 +68,27 @@ The workflow can also be run manually from the GitHub Actions tab with optional 
 - The app uses only Node built-ins, so no dependency install is required.
 - Set `SWIFTYPE_AUTH_TOKEN`, `SWIFTYPE_ENGINE`, and `PORT` in the deployment environment.
 - For Contentstack Launch, point the start command to `npm start`.
+
+## Contentstack Launch Setup
+
+Deploy this as an SSR-style Node server app because `/api/analytics` reads the Swiftype token from server-side environment variables.
+
+Recommended Launch settings:
+
+```text
+Repository: VarshaSreenivas20/swiftype-dashboard
+Git Branch: main
+Framework Preset: Other
+Build Command: npm run build
+Output Directory: .
+Server Command: npm start
+```
+
+Add these environment variables in the Launch environment:
+
+```text
+SWIFTYPE_AUTH_TOKEN=<your Swiftype token>
+SWIFTYPE_ENGINE=contentstack-documentation
+```
+
+Launch provides `PORT` automatically for server apps, and the server reads it through `process.env.PORT`.

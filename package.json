@@ -5,6 +5,7 @@
   "description": "Dashboard and automation script for Contentstack Docs Swiftype search analytics.",
   "type": "module",
   "scripts": {
+    "build": "node scripts/verify-build.js",
     "start": "node server.js",
     "fetch": "node scripts/fetch-swiftype-analytics.js",
     "dev": "node server.js"
