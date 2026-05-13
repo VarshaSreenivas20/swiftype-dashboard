@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contentstack Swiftype Search Dashboard</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">Contentstack Docs</p>
+          <h1>Swiftype Search Analytics</h1>
+        </div>
+        <div class="status" id="sourceStatus">Loading</div>
+      </header>
+
+      <section class="controls" aria-label="Date range controls">
+        <label>
+          <span>Start date</span>
+          <input id="startDate" type="date">
+        </label>
+        <label>
+          <span>End date</span>
+          <input id="endDate" type="date">
+        </label>
+        <label>
+          <span>Rows</span>
+          <select id="perPage">
+            <option value="25">25</option>
+            <option value="50">50</option>
+            <option value="100" selected>100</option>
+          </select>
+        </label>
+        <button id="refreshButton" type="button">Refresh</button>
+      </section>
+
+      <section class="metrics" aria-label="Summary metrics">
+        <article>
+          <span>Total searches</span>
+          <strong id="totalSearches">0</strong>
+        </article>
+        <article>
+          <span>No-result searches</span>
+          <strong id="totalNoResults">0</strong>
+        </article>
+        <article>
+          <span>No-result rate</span>
+          <strong id="noResultRate">0%</strong>
+        </article>
+        <article>
+          <span>Tracked queries</span>
+          <strong id="trackedQueries">0</strong>
+        </article>
+      </section>
+
+      <section class="visual-grid">
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>Top Query Volume</h2>
+          </div>
+          <div id="topBars" class="bars"></div>
+        </div>
+        <div class="panel">
+          <div class="panel-heading">
+            <h2>No-Result Opportunities</h2>
+          </div>
+          <div id="noResultBars" class="bars danger"></div>
+        </div>
+      </section>
+
+      <section class="tabs" aria-label="Analytics tables">
+        <div class="tab-list" role="tablist">
+          <button class="tab active" id="topTab" type="button">Top queries</button>
+          <button class="tab" id="noResultTab" type="button">No-result queries</button>
+        </div>
+
+        <div class="table-toolbar">
+          <label>
+            <span>Filter</span>
+            <input id="queryFilter" type="search" placeholder="Search query text">
+          </label>
+          <button id="downloadButton" type="button">Download JSON</button>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Rank</th>
+                <th>Query</th>
+                <th>Searches</th>
+                <th>Clicks</th>
+                <th>Share</th>
+              </tr>
+            </thead>
+            <tbody id="queryRows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <script src="/app.js" type="module"></script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+name: Swiftype Analytics Snapshot
+
+on:
+  schedule:
+    # 11:00 AM IST is 05:30 UTC.
+    - cron: "30 5 * * *"
+  workflow_dispatch:
+    inputs:
+      start_date:
+        description: "Start date in YYYY-MM-DD format"
+        required: false
+      end_date:
+        description: "End date in YYYY-MM-DD format"
+        required: false
+      per_page:
+        description: "Number of rows to fetch"
+        required: false
+        default: "100"
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-swiftype-analytics:
+    runs-on: ubuntu-latest
+    env:
+      SWIFTYPE_AUTH_TOKEN: ${{ secrets.SWIFTYPE_AUTH_TOKEN }}
+      SWIFTYPE_ENGINE: ${{ vars.SWIFTYPE_ENGINE || 'contentstack-documentation' }}
+      START_DATE: ${{ inputs.start_date }}
+      END_DATE: ${{ inputs.end_date }}
+      PER_PAGE: ${{ inputs.per_page || '100' }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch Swiftype analytics
+        run: npm run fetch
+
+      - name: Commit analytics snapshot
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "chore: update Swiftype analytics snapshot"
+          file_pattern: data/swiftype-analytics-*.json

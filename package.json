@@ -1,0 +1,15 @@
+{
+  "name": "contentstack-swiftype-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Dashboard and automation script for Contentstack Docs Swiftype search analytics.",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "fetch": "node scripts/fetch-swiftype-analytics.js",
+    "dev": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
