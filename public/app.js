@@ -10,6 +10,7 @@ const elements = {
   perPage: document.querySelector("#perPage"),
   refreshButton: document.querySelector("#refreshButton"),
   sourceStatus: document.querySelector("#sourceStatus"),
+  errorMessage: document.querySelector("#errorMessage"),
   totalSearches: document.querySelector("#totalSearches"),
   totalNoResults: document.querySelector("#totalNoResults"),
   noResultRate: document.querySelector("#noResultRate"),
@@ -49,6 +50,8 @@ function setDefaultDates() {
 
 async function loadAnalytics() {
   elements.sourceStatus.textContent = "Loading";
+  elements.errorMessage.hidden = true;
+  elements.errorMessage.textContent = "";
   elements.refreshButton.disabled = true;
 
   const params = new URLSearchParams({
@@ -64,7 +67,9 @@ async function loadAnalytics() {
     state.data = data;
     render();
   } catch (error) {
-    elements.sourceStatus.textContent = "Error";
+    elements.sourceStatus.textContent = "API Error";
+    elements.errorMessage.hidden = false;
+    elements.errorMessage.textContent = error.message;
     elements.queryRows.innerHTML = `<tr><td class="empty" colspan="5">${escapeHtml(error.message)}</td></tr>`;
   } finally {
     elements.refreshButton.disabled = false;

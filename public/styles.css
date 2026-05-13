@@ -87,6 +87,17 @@ h2 {
   margin-top: 18px;
 }
 
+.error-message {
+  margin-top: 14px;
+  padding: 14px 16px;
+  border: 1px solid rgba(225, 77, 104, 0.28);
+  border-radius: 8px;
+  background: rgba(225, 77, 104, 0.08);
+  color: #8a1830;
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .controls,
 .table-toolbar {
   display: flex;
